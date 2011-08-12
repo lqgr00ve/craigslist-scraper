@@ -1,0 +1,6 @@
+*.swp
+*~
+*.ignore
+.DS_STORE
+*.pyc
+*.log
