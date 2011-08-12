@@ -1,4 +1,5 @@
 import BeautifulSoup
+from termcolor import cprint
 import md5
 import re
 import time
@@ -7,7 +8,6 @@ import urllib2
 from config import settings
 
 PRICE_REGEX = re.compile('\$([\d]+)')
-
 all_entries = {}
 
 def parse_entry(entry):
@@ -34,7 +34,7 @@ def parse_entry(entry):
 
     neighborhood_match = False
     for n in settings.neighborhoods:
-        if n in neighborhood:
+        if n.lower() in neighborhood.lower():
             neighborhood_match = True
 
     ret['match'] = price_match and neighborhood_match
@@ -49,12 +49,17 @@ def scrape():
     bq = soup.findAll('blockquote')[1]
     entries = bq.findAll('p')
     for entry in entries:
-        parsed = parse_entry(entry)
+        try:
+            parsed = parse_entry(entry)
+        except:
+            #cprint("failure. " + str(entry), 'red')
+            continue
+
         if parsed['id'] in all_entries:
             continue
         all_entries[parsed['id']] = parsed
         if parsed['match']:
-            print parsed
+            cprint(str(parsed), 'green')
 
 if __name__ == '__main__':
     while True:
