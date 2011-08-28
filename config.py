@@ -4,11 +4,15 @@ settings_dict = {
     'neighborhoods' : [
         'north beach', 
         'telegraph hill', 
-        'nob hill', 
         'marina', 
         'cow hollow', 
         'russian hill', 
-        'soma'
+        'soma',
+	'downtown'
+    ],
+    'badhoods' : [
+        'oakland',
+        'san jose'
     ],
     'max_rent' : 1700
 }

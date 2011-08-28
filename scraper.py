@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+
 import BeautifulSoup
 from termcolor import cprint
 import md5
@@ -36,6 +38,10 @@ def parse_entry(entry):
     for n in settings.neighborhoods:
         if n.lower() in neighborhood.lower():
             neighborhood_match = True
+
+    for n in settings.badhoods:
+        if n.lower() in neighborhood.lower():
+            neighborhood_match = False
 
     ret['match'] = price_match and neighborhood_match
 
